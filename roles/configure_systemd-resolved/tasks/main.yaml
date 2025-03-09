@@ -1,0 +1,26 @@
+---
+- name: Update systemd-resolved DNS settings
+  lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - { regexp: '^#?DNS=', line: 'DNS=10.7.0.83' }
+    - { regexp: '^#?FallbackDNS=', line: 'FallbackDNS=1.1.1.1 8.8.8.8' }
+    - { regexp: '^#?Domains=', line: 'Domains=homelab.local' }
+    - { regexp: '^#?DNSSEC=', line: 'DNSSEC=no' }
+
+  name: Restart systemd-resolved service
+  systemd:
+    name: systemd-resolved
+    state: restarted
+
+  name: Verify DNS settings
+  command: resolvectl status
+  register: dns_status
+  changed_when: false
+
+  name: Display DNS configuration
+  debug:
+    msg: "{{ dns_status.stdout_lines }}"
