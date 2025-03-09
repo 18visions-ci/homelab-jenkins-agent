@@ -7,4 +7,4 @@
   roles:
     - common
     - jenkins_agent
-    - firewall
+    #- firewall
