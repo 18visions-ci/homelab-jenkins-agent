@@ -6,7 +6,7 @@ After=network.target
 User=jenkins
 WorkingDirectory=/home/jenkins/agent
 Environment="HOME=/home/jenkins" "USER=jenkins"
-ExecStart=/usr/bin/java -jar /home/jenkins/agent/agent.jar -url http://jenkins-dev.homelab.local/ -secret c063a7c98680959a458c28087ade71aefb1787c3b42d8fdcae80dd49b05e2f57 -name agent1 -webSocket -workDir "/home/jenkins/agent"
+ExecStart=/usr/bin/java -jar /home/jenkins/agent/agent.jar -url {{ jenkins_url }} -secret {{ jenkins_agent_secret }} -name {{ jenkins_agent_name }} -webSocket -workDir "/home/jenkins/agent"
 Restart=always
 RestartSec=10
 StandardOutput=journal

@@ -18,7 +18,7 @@
 
 - name: Download Jenkins agent JAR
   get_url:
-    url: "http://jenkins-dev.homelab.local/jnlpJars/agent.jar"
+    url: "http://{{ jenkins_url }}/jnlpJars/agent.jar"
     dest: "/home/jenkins/agent/agent.jar"
     owner: jenkins
     group: jenkins
