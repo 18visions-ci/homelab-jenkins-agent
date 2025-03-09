@@ -1,0 +1,6 @@
+---
+- name: Restart Jenkins Agent
+  systemd:
+    name: jenkins-agent
+    state: restarted
+    daemon_reload: yes
