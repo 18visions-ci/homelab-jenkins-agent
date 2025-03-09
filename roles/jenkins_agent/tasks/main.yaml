@@ -1,9 +1,12 @@
 ---
-- name: Create Jenkins agent user
+- name: Create Jenkins user
   user:
     name: jenkins
     shell: /bin/bash
-    create_home: yes
+    home: /home/jenkins
+    createhome: yes
+    groups: adm,systemd-journal
+    append: yes
 
 - name: Create Jenkins agent directory
   file:
