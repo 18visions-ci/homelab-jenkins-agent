@@ -1,0 +1,10 @@
+---
+- name: Deploy Jenkins Agent on Ubuntu 22.04
+  hosts: jenkins_agents
+  become: yes
+  become_method: sudo  # Explicitly set sudo
+  become_user: root  # Run as root
+  roles:
+    - common
+    - jenkins_agent
+    - firewall
