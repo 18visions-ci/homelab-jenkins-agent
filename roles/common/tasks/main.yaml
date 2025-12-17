@@ -1,4 +1,8 @@
 ---
+- name: Set hostname
+  hostname:
+    name: jenkins-agent-dc
+
 - name: Update APT package index
   apt:
     update_cache: yes
