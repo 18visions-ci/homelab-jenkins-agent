@@ -11,16 +11,16 @@
     - { regexp: '^#?Domains=', line: 'Domains=homelab.local' }
     - { regexp: '^#?DNSSEC=', line: 'DNSSEC=no' }
 
-  name: Restart systemd-resolved service
+- name: Restart systemd-resolved service
   systemd:
     name: systemd-resolved
     state: restarted
 
-  name: Verify DNS settings
+- name: Verify DNS settings
   command: resolvectl status
   register: dns_status
   changed_when: false
 
-  name: Display DNS configuration
+- name: Display DNS configuration
   debug:
     msg: "{{ dns_status.stdout_lines }}"
