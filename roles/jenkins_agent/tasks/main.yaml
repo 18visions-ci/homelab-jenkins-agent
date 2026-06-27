@@ -16,6 +16,11 @@
     group: jenkins
     mode: '0755'
 
+- name: Check if Jenkins agent JAR already exists
+  stat:
+    path: /home/jenkins/agent/agent.jar
+  register: agent_jar_stat
+
 - name: Download Jenkins agent JAR
   get_url:
     url: "http://{{ jenkins_url }}/jnlpJars/agent.jar"
@@ -23,6 +28,7 @@
     owner: jenkins
     group: jenkins
     mode: '0644'
+  when: not agent_jar_stat.stat.exists
 
 - name: Create systemd service file for Jenkins agent
   template:

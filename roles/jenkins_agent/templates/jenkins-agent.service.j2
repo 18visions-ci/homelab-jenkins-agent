@@ -7,8 +7,9 @@ User=jenkins
 WorkingDirectory=/home/jenkins/agent
 Environment="HOME=/home/jenkins" "USER=jenkins"
 ExecStart=/usr/bin/java -jar /home/jenkins/agent/agent.jar -url http://{{ jenkins_url }} -secret {{ jenkins_agent_secret }} -name {{ jenkins_agent_name }} -webSocket -workDir "/home/jenkins/agent"
-Restart=always
+Restart=on-failure
 RestartSec=10
+LimitNOFILE=65536
 StandardOutput=journal
 StandardError=journal
 

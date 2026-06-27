@@ -4,6 +4,10 @@
   become: yes
   become_method: sudo  # Explicitly set sudo
   become_user: root  # Run as root
+  vars:
+    jenkins_url: "jenkins.ivebeens.hot:8080"
+    jenkins_agent_secret: "{{ lookup('env', 'JENKINS_AGENT_SECRET') }}"
+    jenkins_agent_name: "jenkins-agent-dc"
   roles:
     - common
     - jenkins_agent
